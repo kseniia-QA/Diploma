@@ -1,16 +1,10 @@
 package ru.netology.travel;
 
-import com.codeborne.selenide.Condition;
 import lombok.SneakyThrows;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.time.Duration;
-
-import static com.codeborne.selenide.Condition.exactText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
 
 public final class SqlGetters {
     private static boolean isCredit;
@@ -21,14 +15,13 @@ public final class SqlGetters {
 
     @SneakyThrows
     private Connection getConnection(String base) {
-        if (base.equalsIgnoreCase("mysql")) {
-            return DriverManager.getConnection("jdbc:mysql://217.25.88.206:3306/mysql", "user", "pass");
+        if (base.equalsIgnoreCase("postgresql")) {
+            return DriverManager.getConnection("jdbc:postgresql://localhost:5432/rand", "app", "pass");
         } else {
-            return DriverManager.getConnection("jdbc:mysql://217.25.88.206:3306/mysql", "user", "pass");
+            return DriverManager.getConnection("jdbc:mysql://localhost:3306/app", "app", "pass");
         }
-
-
     }
+
     @SneakyThrows
     private String getLastPaymentId(String base) {
         Connection conn = getConnection(base);
@@ -70,6 +63,4 @@ public final class SqlGetters {
         }
         return status;
     }
-
-
 }
